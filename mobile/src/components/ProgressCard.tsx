@@ -1,35 +1,54 @@
+import Feather from '@expo/vector-icons/Feather';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { colors } from '../theme/colors';
+import { radius, spacing } from '../theme/spacing';
+import { typography } from '../theme/typography';
 
+// Empty state only: analysis history does not exist yet, so no data is shown.
 export function ProgressCard() {
   return (
     <View style={styles.card}>
-      <Text style={styles.title}>Your Progress</Text>
-      <Text style={styles.message}>
-        No analyses yet. Your completed stroke analyses will appear here.
-      </Text>
+      <View style={styles.iconContainer}>
+        <Feather name="bar-chart-2" size={22} color={colors.textTertiary} />
+      </View>
+      <View style={styles.text}>
+        <Text style={styles.title}>No analyses yet</Text>
+        <Text style={styles.message}>Your first forehand analysis will appear here.</Text>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: colors.surface,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.lg,
     borderColor: colors.border,
-    borderWidth: 1,
-    borderRadius: 16,
-    padding: 20,
+    borderStyle: 'dashed',
+    borderWidth: 1.5,
+    borderRadius: radius.lg,
+    padding: spacing.xl,
+  },
+  iconContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 48,
+    height: 48,
+    backgroundColor: colors.surfaceRaised,
+    borderRadius: radius.sm,
+  },
+  text: {
+    flex: 1,
+    gap: spacing.xs,
   },
   title: {
+    ...typography.label,
     color: colors.textPrimary,
-    fontSize: 17,
-    fontWeight: '700',
   },
   message: {
-    color: colors.textSecondary,
-    fontSize: 15,
-    lineHeight: 22,
-    marginTop: 8,
+    ...typography.caption,
+    color: colors.textTertiary,
   },
 });
